@@ -5,7 +5,7 @@ class Product:
         self.quantity :int = quantity
         self.active :bool = True
 
-    def get_quantity(self):
+    def get_quantity(self) -> int:
         return self.quantity
     def set_quantity(self, quantity):
         self.quantity = quantity
@@ -14,7 +14,7 @@ class Product:
         self.active = True
     def deactivate(self):
         self.active = False
-    def is_active(self):
+    def is_active(self) -> bool:
         return self.active
     # Show's all important data about the product, including name, price and quantity.
     def show(self):
@@ -26,12 +26,11 @@ class Product:
 
     # function which handles the buying process, including substraction of the total amount. It also prints out the
     # amount left and the total price of this transaction.
-    def buy(self, quantity: float):
+    def buy(self, quantity: float) -> float:
         if quantity <= 0:
-            print("You can't buy a negative quantity")
+            raise ValueError("Quantity is less than 0")
         if not self.check_stock(quantity):
-            print(f"Not enough {self.name} in stock! You can not buy {quantity} items.")
-            return
+            raise ValueError("Cannot buy more than quantity")
 
         total_left = self.quantity - quantity
         self.set_quantity(total_left)
@@ -40,3 +39,4 @@ class Product:
                f"\r\nCompleting the deal..."
                f"\r\nThere are still {total_left} items left"
                f"\r\nThanks for your purchase!\r\n")
+        return total_price
