@@ -1,7 +1,7 @@
 from products import Product
 class Store:
 
-    products = [Product]
+    #products = [Product]
 
     def __init__(self, products: list[Product]):
         self.products = products
@@ -22,7 +22,7 @@ class Store:
         for product in self.products:
             if product.active:
                 result.append(product)
-        return self.products
+        return result
 
     def find_product_by_name(self, name: str):
         for product in self.products:
